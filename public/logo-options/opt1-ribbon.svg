@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 140">
+  <defs>
+    <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2d7d8e"/>
+      <stop offset="100%" style="stop-color:#4da3b5"/>
+    </linearGradient>
+    <linearGradient id="g1gold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#e89700"/>
+      <stop offset="100%" style="stop-color:#f5a623"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Flowing ribbon through the letters -->
+  <path d="M10,100 Q60,75 100,100 Q140,85 180,100 Q220,80 260,100 Q300,85 340,100 Q380,80 430,100"
+        fill="none" stroke="url(#g1gold)" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+
+  <!-- F L O N C O — flowing italic serif -->
+  <text x="10" y="72" font-family="Georgia, 'Times New Roman', serif"
+        font-size="62" font-weight="700" font-style="italic" letter-spacing="3"
+        fill="url(#g1)">FLONCO</text>
+
+  <text x="14" y="105" font-family="Arial, Helvetica, sans-serif"
+        font-size="11" font-weight="400" letter-spacing="11"
+        fill="#94a3b8">GLOBAL</text>
+</svg>

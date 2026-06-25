@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>FLONCO Logo Video Recorder</title>
+<style>
+  body { margin: 0; background: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; overflow: hidden; font-family: system-ui; }
+  canvas { display: block; }
+  #status { position: fixed; bottom: 20px; left: 20px; color: #fff; font-size: 14px; background: rgba(0,0,0,0.8); padding: 8px 16px; border-radius: 6px; z-index: 10; }
+  #controls { position: fixed; top: 20px; right: 20px; z-index: 10; display: flex; gap: 10px; }
+  button { padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 600; }
+  .record { background: #E85D04; color: #fff; }
+  .stop { background: #333; color: #fff; }
+  .download { background: #2a2; color: #fff; }
+</style></head><body>
+<canvas id="c"></canvas>
+<div id="status">Loading logo...</div>
+<div id="controls">
+  <button class="record" id="btnRecord">录制</button>
+  <button class="stop" id="btnStop" style="display:none">停止</button>
+  <button class="download" id="btnDownload" style="display:none">下载</button>
+</div>
+<script>
+const W = 1920, H = 1080;
+const canvas = document.getElementById('c');
+canvas.width = W; canvas.height = H;
+const ctx = canvas.getContext('2d');
+const status = document.getElementById('status');
+
+const logoImg = new Image();
+logoImg.src = '/logo-colors/logo-flame-text.svg';
+
+let animationId = null;
+let animationType = 'light-sweep'; // or 'forge-reveal'
+let mediaRecorder = null;
+let recordedChunks = [];
+let startTime = null;
+
+// Easing
+function easeInOutCubic(t) { return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2; }
+function easeOutCubic(t) { return 1 - Math.pow(1-t,3); }
+
+function drawLightSweep(progress) {
+  ctx.fillStyle = '#0a0a0a';
+  ctx.fillRect(0, 0, W, H);
+
+  const logoW = W * 0.55;
+  const logoH = (logoW / 1599) * 672;
+  const lx = (W - logoW) / 2;
+  const ly = (H - logoH) / 2;
+
+  // Dim logo
+  ctx.globalAlpha = 0.12;
+  ctx.drawImage(logoImg, lx, ly, logoW, logoH);
+
+  // Beam position
+  const beamX = easeInOutCubic(progress) * W * 1.1;
+
+  // Revealed logo
+  ctx.globalAlpha = 1;
+  ctx.save();
+  ctx.beginPath();
+  ctx.rect(0, 0, beamX, H);
+  ctx.clip();
+  ctx.drawImage(logoImg, lx, ly, logoW, logoH);
+  ctx.restore();
+
+  // Glow line at beam edge
+  const grad = ctx.createLinearGradient(beamX - 80, 0, beamX + 50, 0);
+  grad.addColorStop(0, 'rgba(232,93,4,0)');
+  grad.addColorStop(0.4, 'rgba(255,186,8,0.5)');
+  grad.addColorStop(0.6, 'rgba(255,255,255,0.85)');
+  grad.addColorStop(1, 'rgba(232,93,4,0)');
+  ctx.fillStyle = grad;
+  ctx.fillRect(beamX - 80, 0, 130, H);
+
+  // Particles
+  for (let i = 0; i < 20; i++) {
+    const px = beamX + (Math.sin(progress * 8 + i * 2.1) * 40);
+    const py = (Math.sin(progress * 12 + i) * 0.5 + 0.5) * H;
+    const size = Math.random() * 3 + 1;
+    ctx.fillStyle = Math.random() > 0.5 ? '#FFBA08' : '#E85D04';
+    ctx.beginPath();
+    ctx.arc(px, py, size, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Final pulse
+  if (progress > 0.85) {
+    const pulse = Math.sin((progress - 0.85) / 0.15 * Math.PI) * 0.2;
+    ctx.fillStyle = `rgba(232,93,4,${pulse})`;
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  ctx.globalAlpha = 1;
+}
+
+function drawForgeReveal(progress) {
+  ctx.fillStyle = '#0a0a0a';
+  ctx.fillRect(0, 0, W, H);
+
+  const logoW = W * 0.5;
+  const logoH = (logoW / 1599) * 672;
+  const lx = (W - logoW) / 2;
+  const ly = (H - logoH) / 2;
+
+  if (progress < 0.3) {
+    const t = progress / 0.3;
+    ctx.globalAlpha = t * 0.6;
+    ctx.fillStyle = '#FFFFFF';
+    ctx.shadowColor = '#FFFFFF';
+    ctx.shadowBlur = 40 + t * 80;
+    ctx.fillRect(lx - 30, ly - 20, logoW + 60, logoH + 40);
+    ctx.shadowBlur = 0;
+  }
+
+  if (progress >= 0.3 && progress < 0.7) {
+    const t = (progress - 0.3) / 0.4;
+    const r = Math.round(255 - t * (255 - 232));
+    const g = Math.round(255 - t * (255 - 93));
+    const b = Math.round(255 - t * (255 - 4));
+    ctx.fillStyle = `rgb(${r},${g},${b})`;
+    ctx.shadowColor = `rgb(${r},${g},${b})`;
+    ctx.shadowBlur = 30 * (1 - t * 0.7);
+    ctx.fillRect(lx - 30, ly - 20, logoW + 60, logoH + 40);
+    ctx.shadowBlur = 0;
+
+    ctx.globalAlpha = t;
+    ctx.drawImage(logoImg, lx, ly, logoW, logoH);
+  }
+
+  if (progress >= 0.7) {
+    ctx.globalAlpha = 1;
+    ctx.drawImage(logoImg, lx, ly, logoW, logoH);
+    ctx.shadowColor = '#E85D04';
+    ctx.shadowBlur = Math.sin(progress * 20) * 8 + 4;
+    ctx.drawImage(logoImg, lx, ly, logoW, logoH);
+    ctx.shadowBlur = 0;
+  }
+
+  // Heat haze
+  if (progress > 0.15 && progress < 0.6) {
+    ctx.globalAlpha = 0.08;
+    ctx.save();
+    ctx.translate(Math.sin(progress * 30 + 1) * 4, Math.cos(progress * 30) * 4);
+    ctx.drawImage(logoImg, lx, ly, logoW, logoH);
+    ctx.restore();
+  }
+
+  ctx.globalAlpha = 1;
+}
+
+function animate(timestamp) {
+  if (!startTime) startTime = timestamp;
+  const duration = 4000; // 4 seconds
+  const elapsed = timestamp - startTime;
+
+  if (elapsed > duration + 500) {
+    // Animation done - draw final frame
+    if (animationType === 'light-sweep') {
+      ctx.fillStyle = '#0a0a0a';
+      ctx.fillRect(0, 0, W, H);
+      const logoW = W * 0.55;
+      const logoH = (logoW / 1599) * 672;
+      ctx.drawImage(logoImg, (W-logoW)/2, (H-logoH)/2, logoW, logoH);
+    }
+    if (mediaRecorder && mediaRecorder.state === 'recording') {
+      mediaRecorder.stop();
+      status.textContent = '录制完成！';
+      document.getElementById('btnRecord').style.display = 'none';
+      document.getElementById('btnStop').style.display = 'none';
+      document.getElementById('btnDownload').style.display = 'inline';
+    }
+    return;
+  }
+
+  const progress = Math.min(elapsed / duration, 1);
+
+  if (animationType === 'light-sweep') drawLightSweep(progress);
+  else if (animationType === 'forge-reveal') drawForgeReveal(progress);
+
+  animationId = requestAnimationFrame(animate);
+}
+
+function startAnimation(type) {
+  animationType = type;
+  startTime = null;
+  if (animationId) cancelAnimationFrame(animationId);
+  animationId = requestAnimationFrame(animate);
+}
+
+function startRecording() {
+  const stream = canvas.captureStream(30);
+  recordedChunks = [];
+
+  // Try MP4 codec, fallback to webm
+  const mimeTypes = ['video/webm;codecs=vp9', 'video/webm;codecs=vp8', 'video/webm'];
+  let mimeType = mimeTypes.find(m => MediaRecorder.isTypeSupported(m)) || 'video/webm';
+
+  mediaRecorder = new MediaRecorder(stream, { mimeType, videoBitsPerSecond: 8000000 });
+
+  mediaRecorder.ondataavailable = (e) => {
+    if (e.data.size > 0) recordedChunks.push(e.data);
+  };
+
+  mediaRecorder.onstop = () => {
+    const blob = new Blob(recordedChunks, { type: mimeType });
+    const url = URL.createObjectURL(blob);
+
+    // Store for download
+    window._videoBlob = blob;
+    window._videoUrl = url;
+
+    // Also convert to base64 for CDP retrieval
+    const reader = new FileReader();
+    reader.onload = () => {
+      window._videoBase64 = reader.result.split(',')[1];
+      console.log('VIDEO_READY ' + window._videoBase64.length + ' bytes');
+    };
+    reader.readAsDataURL(blob);
+
+    status.textContent = '录制完成！点击下载或等待自动保存';
+    document.getElementById('btnRecord').style.display = 'none';
+    document.getElementById('btnStop').style.display = 'none';
+    document.getElementById('btnDownload').style.display = 'inline';
+  };
+
+  mediaRecorder.start();
+  status.textContent = '录制中... ' + (animationType === 'light-sweep' ? '能量光扫' : '熔铸渐显');
+  document.getElementById('btnRecord').style.display = 'none';
+  document.getElementById('btnStop').style.display = 'inline';
+  document.getElementById('btnDownload').style.display = 'none';
+
+  // Start animation and recording together
+  startAnimation(animationType);
+}
+
+function stopRecording() {
+  if (mediaRecorder && mediaRecorder.state === 'recording') {
+    mediaRecorder.stop();
+  }
+}
+
+function downloadVideo() {
+  if (window._videoUrl) {
+    const name = animationType === 'light-sweep' ? 'FLONCO-LightSweep' : 'FLONCO-ForgeReveal';
+    const a = document.createElement('a');
+    a.href = window._videoUrl;
+    a.download = name + '.webm';
+    a.click();
+  }
+}
+
+// UI setup
+document.getElementById('btnRecord').addEventListener('click', startRecording);
+document.getElementById('btnStop').addEventListener('click', stopRecording);
+document.getElementById('btnDownload').addEventListener('click', downloadVideo);
+
+// Expose for CDP control
+window._startRecording = startRecording;
+window._stopRecording = stopRecording;
+window._downloadVideo = downloadVideo;
+window._setAnimation = (type) => { animationType = type; };
+window._getVideoBase64 = () => window._videoBase64;
+window._isRecordingDone = () => window._videoBase64 ? true : false;
+
+// Auto-record if URL has ?type= parameter
+const urlParams = new URLSearchParams(window.location.search);
+const autoType = urlParams.get('type');
+
+logoImg.onload = () => {
+  status.textContent = '就绪 — 选择动画类型并点击录制';
+  // Draw initial preview
+  ctx.fillStyle = '#0a0a0a';
+  ctx.fillRect(0, 0, W, H);
+  const logoW = W * 0.5;
+  const logoH = (logoW / 1599) * 672;
+  ctx.drawImage(logoImg, (W-logoW)/2, (H-logoH)/2, logoW, logoH);
+
+  // Auto-record if URL has ?type= parameter
+  if (autoType === 'light-sweep' || autoType === 'forge-reveal') {
+    animationType = autoType;
+    status.textContent = 'Auto-recording: ' + (autoType === 'light-sweep' ? 'Light Sweep' : 'Forge Reveal') + '...';
+    setTimeout(() => startRecording(), 800);
+  }
+};
+
+// Keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+  if (e.key === '1') { status.textContent = '已选: 能量光扫 Light Sweep'; animationType = 'light-sweep'; }
+  if (e.key === '2') { status.textContent = '已选: 熔铸渐显 Forge Reveal'; animationType = 'forge-reveal'; }
+  if (e.key === 'r' && !mediaRecorder) startRecording();
+  if (e.key === 's' && mediaRecorder && mediaRecorder.state === 'recording') stopRecording();
+  if (e.key === 'd' && window._videoUrl) downloadVideo();
+});
+</script>
+</body></html>
