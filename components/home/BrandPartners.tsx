@@ -37,14 +37,14 @@ export default function BrandPartners() {
           transition={{ duration: 0.5 }}
         >
           <span className="inline-block text-xs font-bold uppercase tracking-[0.2em] text-accent mb-3">
-            Trusted Supply Chain
+            Premium Brand Distribution
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#1E293B] mb-3 tracking-tight">
-            Partnering with <span className="text-primary">Top-Tier Manufacturers</span>
+            Also Distributing <span className="text-primary">Premium Brands</span>
           </h2>
           <p className="text-gray-500 max-w-xl mx-auto text-base leading-relaxed">
-            We source directly from China&apos;s most trusted solar brands — all Tier-1
-            producers with proven track records and international certifications.
+            Beyond our FLONCO-brand products, we distribute Tier-1 solar brands —
+            giving you the flexibility to choose the right component for every project.
           </p>
         </motion.div>
 

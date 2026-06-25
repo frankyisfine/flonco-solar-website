@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "About Us",
-  description: `Learn about ${siteConfig.name} — your trusted solar energy partner. We connect global buyers with China's best solar manufacturers, delivering quality and value.`,
+  description: `Learn about ${siteConfig.name} — a factory-backed renewable energy brand and system integrator. FLONCO-brand products, strategic joint-manufacturing, and global distribution.`,
 };
 
 export default function AboutPage() {
@@ -17,10 +17,11 @@ export default function AboutPage() {
           <div className="max-w-3xl">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">About FLONCO</h1>
             <p className="text-lg text-gray-300 leading-relaxed">
-              We are a China-based solar energy trading company dedicated to connecting
-              global buyers with premium photovoltaic products and solutions. With deep
-              industry expertise and strong supplier relationships, we help our clients
-              access quality solar technology at competitive prices.
+              FLONCO SOLAR is a factory-backed renewable energy brand and system integrator
+              based in Hefei, Anhui — China&apos;s photovoltaic heartland. We own the FLONCO
+              brand, set our own technology standards, and deliver complete solar + storage
+              solutions through strategic joint-manufacturing bases and a global distribution
+              network spanning 30+ countries.
             </p>
           </div>
         </div>
@@ -34,17 +35,17 @@ export default function AboutPage() {
               {
                 icon: Target,
                 title: "Our Mission",
-                desc: "To accelerate the global transition to clean energy by making high-quality solar products accessible and affordable for businesses and communities worldwide.",
+                desc: "To accelerate the global energy transition by delivering FLONCO-brand solar and storage solutions — combining factory quality with system integration expertise.",
               },
               {
                 icon: Globe,
                 title: "Our Vision",
-                desc: "To become a leading solar trading partner globally, trusted for our product quality, industry expertise, and commitment to customer success.",
+                desc: "To become a globally recognized renewable energy brand, trusted for product quality, technology innovation, and end-to-end system integration capabilities.",
               },
               {
                 icon: TrendingUp,
-                title: "Our Values",
-                desc: "Integrity, quality, and customer-first service guide everything we do. We build long-term partnerships, not just transactions.",
+                title: "Our Model",
+                desc: "Brand-owned, factory-backed. We set our own technology standards and deliver through strategic joint-manufacturing bases — combining quality control with supply chain efficiency.",
               },
             ].map((item) => (
               <div key={item.title} className="text-center">
@@ -64,27 +65,37 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-2xl sm:text-3xl font-bold text-primary mb-6 text-center">
-              Our Story
+              Our Model: Factory-Backed, Brand-Owned
             </h2>
             <div className="space-y-4 text-gray-600 leading-relaxed">
               <p>
-                FLONCO was founded with a clear vision: to bridge the gap between
-                international solar buyers and China&apos;s world-class photovoltaic
-                manufacturing ecosystem. After years of hands-on experience in the solar
-                export industry, we recognized that many buyers struggle to navigate the
-                complex supplier landscape — and that&apos;s where we come in.
+                FLONCO is not a trading company — we are a brand owner and system
+                integrator backed by strategic joint-manufacturing bases in Anhui
+                Province, the epicenter of China&apos;s solar industry. Through exclusive
+                joint ventures and long-term manufacturing partnerships, we control
+                our product quality from raw material sourcing to final shipment.
               </p>
               <p>
-                Based in Hefei, Anhui — one of China&apos;s key hubs for solar technology
-                and manufacturing — we have direct access to tier-1 factories and a deep
-                network of trusted suppliers. This allows us to source high-quality products
-                across the full solar supply chain at competitive factory-direct pricing.
+                Our model combines the best of both worlds: the quality assurance
+                and cost efficiency of factory-direct production, with the flexibility
+                of a brand-driven technology company. We design the specifications,
+                own the FLONCO brand, manage the supply chain, and integrate complete
+                solar + storage systems — all while our joint-manufacturing partners
+                operate world-class production facilities dedicated to our orders.
               </p>
               <p>
-                We work with installers, distributors, EPC contractors, and project
-                developers across 15+ markets worldwide. Whether you need a single
-                container of panels or a complete solar system solution, we provide
-                the products, documentation, and support you need to succeed.
+                From PERC and TOPCon modules (400W–700W+) to LiFePO4 battery systems
+                (5kWh–1MWh+), every FLONCO product undergoes 100% EL inspection,
+                IV curve testing, and multi-point quality checks. We hold international
+                certifications including TÜV, CE, IEC 61215/61730, and ISO 9001.
+              </p>
+              <p>
+                In addition to our own brand, we maintain distribution partnerships
+                with Tier-1 manufacturers — giving our customers access to the full
+                spectrum of solar products through a single, reliable partner. Whether
+                you need FLONCO-brand modules, Sungrow inverters, or a complete
+                turnkey system, we deliver. Schedule a visit to our Hefei headquarters
+                and manufacturing bases anytime.
               </p>
             </div>
           </div>
@@ -121,8 +132,8 @@ export default function AboutPage() {
             Let&apos;s Build Something Together
           </h2>
           <p className="text-gray-300 mb-6 max-w-lg mx-auto">
-            Partner with us for your solar product sourcing needs and experience the
-            FLONCO difference.
+            Partner with FLONCO — your factory-backed brand and system integration
+            partner for solar and storage solutions worldwide.
           </p>
           <Link
             href="/contact"

@@ -48,6 +48,17 @@ export default function Hero() {
           </h1>
         </motion.div>
 
+        {/* Greentech-style intro */}
+        <motion.p
+          className="text-base sm:text-lg text-white/80 max-w-2xl mx-auto mb-10 leading-relaxed"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.45 }}
+        >
+          FLONCO SOLAR — Your Reliable Renewable Energy Partner &amp; System Integrator.
+          Backed by Advanced Manufacturing Bases in Anhui, China.
+        </motion.p>
+
         {/* CTA buttons */}
         <motion.div
           className="flex flex-col sm:flex-row gap-4 justify-center"

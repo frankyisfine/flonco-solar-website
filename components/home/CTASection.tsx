@@ -67,8 +67,8 @@ export default function CTASection() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          Tell us your requirements and receive a detailed quotation within 24 hours.
-          No obligations, just honest advice from solar experts.
+          Tell us your requirements and receive factory-direct pricing within 24 hours.
+          Or schedule a visit to tour our production lines in person.
         </motion.p>
 
         <motion.div

@@ -1,8 +1,8 @@
 import Hero from "@/components/home/Hero";
 import StatsBar from "@/components/home/StatsBar";
-import SourceFactory from "@/components/home/SourceFactory";
 import ProductCategories from "@/components/home/ProductCategories";
 import WhyChooseUs from "@/components/home/WhyChooseUs";
+import BrandPartners from "@/components/home/BrandPartners";
 import Testimonials from "@/components/home/Testimonials";
 import CTASection from "@/components/home/CTASection";
 
@@ -11,9 +11,9 @@ export default function HomePage() {
     <>
       <Hero />
       <StatsBar />
-      <SourceFactory />
       <ProductCategories />
       <WhyChooseUs />
+      <BrandPartners />
       <Testimonials />
       <CTASection />
     </>

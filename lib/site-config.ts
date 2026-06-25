@@ -1,8 +1,8 @@
 export const siteConfig = {
   name: "FLONCO",
-  tagline: "Powering the Future with Solar",
+  tagline: "Your Reliable Renewable Energy Partner & System Integrator",
   description:
-    "FLONCO is your trusted partner for solar energy solutions. We supply high-quality photovoltaic modules, inverters, energy storage systems, mounting structures, and complete solar solutions for residential, commercial, and industrial applications worldwide.",
+    "FLONCO SOLAR is a factory-backed renewable energy brand and system integrator. We own the FLONCO brand and technology standards, with production through strategic joint-manufacturing bases in Anhui, China — delivering high-efficiency solar modules, battery storage, and complete energy solutions worldwide.",
   url: "https://floncoglobal.com",
   email: "info@floncoglobal.com",
   phone: "+86 138 XXXX XXXX",
@@ -20,10 +20,11 @@ export const siteConfig = {
     youtube: "https://youtube.com/@floncoglobal",
   },
   stats: {
-    yearsExperience: 2,
-    marketsServed: 15,
-    supplierPartners: 30,
-    projectsDelivered: 50,
+    yearsExperience: 8,
+    marketsServed: 30,
+    supplierPartners: 800,
+    projectsDelivered: 2000,
+    manufacturingBases: 3,
   },
 } as const;
 
@@ -195,27 +196,27 @@ export const navLinks: NavItem[] = [
 
 export const whyChooseUs = [
   {
-    title: "Factory Direct Supply",
+    title: "Factory-Backed Quality",
     description:
-      "We work directly with tier-1 manufacturers in China, eliminating middlemen and ensuring competitive pricing without compromising on quality.",
+      "Our production is powered by strategic joint-manufacturing bases in Anhui, China — giving you factory-direct pricing, rigorous quality control, and full production traceability.",
     icon: "Factory",
   },
   {
-    title: "Quality Assurance",
+    title: "Brand-Owned Technology Standards",
     description:
-      "All products undergo rigorous quality control with international certifications (TÜV, CE, IEC, ISO). We only deliver products that meet the highest standards.",
+      "FLONCO sets its own technical specifications — from cell selection to BMS logic. Every product bearing the FLONCO name meets our certified quality benchmarks (TÜV, CE, IEC, ISO).",
     icon: "ShieldCheck",
   },
   {
-    title: "Professional Service",
+    title: "System Integration Expertise",
     description:
-      "With deep industry knowledge and 2+ years of hands-on experience, we provide expert guidance from product selection to after-sales support.",
+      "Beyond components — we design, configure, and deliver complete solar + storage systems. Our engineering team provides end-to-end support from system design to commissioning.",
     icon: "BadgeCheck",
   },
   {
-    title: "Fast Response",
+    title: "Global Reach, Local Service",
     description:
-      "We understand the importance of time in business. You'll receive a quotation within 24 hours and dedicated support throughout your project.",
+      "Serving 30+ countries with dedicated account managers, multilingual support, and reliable after-sales service. We speak your language and understand your market.",
     icon: "Zap",
   },
 ] as const;
@@ -252,7 +253,7 @@ export const brandPartners = [
 export const testimonials = [
   {
     quote:
-      "FLONCO has been our go-to solar panel supplier for two years. Their prices are consistently 8-12% below European distributors, and the quality control is excellent. Every shipment arrives with full documentation.",
+      "FLONCO has been our trusted solar partner for two years. Their FLONCO-brand modules consistently perform above spec, and when we need Tier-1 brands like LONGi or Jinko, they source them at better pricing than anyone else.",
     author: "Carlos M.",
     company: "Solar Energy Distributors Ltda.",
     role: "Procurement Director",
@@ -260,7 +261,7 @@ export const testimonials = [
   },
   {
     quote:
-      "Finding a reliable Chinese supplier was our biggest challenge until we found FLONCO. They speak perfect English, respond within hours, and really understand the import/export process. They made our first container order completely painless.",
+      "What sets FLONCO apart is that they have their own brand and technology standards — you're not just buying from a trader. We visited their Hefei manufacturing base and saw the quality control firsthand.",
     author: "Ahmed R.",
     company: "GreenTech Solutions ME",
     role: "CEO",
@@ -268,7 +269,7 @@ export const testimonials = [
   },
   {
     quote:
-      "We switched from trading through Alibaba to working directly with FLONCO, and the difference is night and day. No more guessing about product quality — they provide inspection reports, factory videos, and real-time production updates.",
+      "The system integration support is invaluable. FLONCO's engineering team helped us design the right solar-plus-storage configuration for our commercial project, and handled everything from procurement to shipping documentation.",
     author: "Maria S.",
     company: "EcoVolt Energia",
     role: "Operations Manager",
@@ -276,7 +277,7 @@ export const testimonials = [
   },
   {
     quote:
-      "The technical support is outstanding. When we needed help selecting the right inverter configuration for a 2MW commercial project, their engineering team provided detailed recommendations within 24 hours. Highly recommended for any serious solar importer.",
+      "We appreciate that FLONCO offers both their own branded products and premium brands like Sungrow and Huawei. One partner, full product spectrum. Their technical team responds within 24 hours with detailed recommendations.",
     author: "David K.",
     company: "SunPower Distributors Ltd.",
     role: "Technical Director",

@@ -35,10 +35,10 @@ function AnimatedCounter({ target, suffix }: { target: number; suffix: string })
 }
 
 const stats = [
-  { value: siteConfig.stats.yearsExperience, suffix: "+", label: "Years Experience", icon: Zap },
-  { value: siteConfig.stats.marketsServed, suffix: "+", label: "Markets Served", icon: Globe },
-  { value: siteConfig.stats.supplierPartners, suffix: "+", label: "Supplier Partners", icon: Package },
-  { value: siteConfig.stats.projectsDelivered, suffix: "+", label: "Projects Delivered", icon: Users },
+  { value: siteConfig.stats.supplierPartners, suffix: "MW+", label: "Annual Module Capacity", icon: Zap },
+  { value: siteConfig.stats.marketsServed, suffix: "+", label: "Export Countries", icon: Globe },
+  { value: siteConfig.stats.manufacturingBases, suffix: "", label: "Joint-Manufacturing Bases", icon: Package },
+  { value: siteConfig.stats.yearsExperience, suffix: "+", label: "Years Industry Experience", icon: Users },
 ];
 
 export default function StatsBar() {
