@@ -1,3 +1,40 @@
+export const solarAccessories: Product = {
+  slug: "solar-accessories",
+  name: "Solar Accessories",
+  category: "Balance of System",
+  description:
+    "Complete range of solar installation accessories — DC combiner boxes, MC4 connectors, solar cables, optimizers, breakers, surge protectors, and mounting hardware. Everything needed to complete your solar installation.",
+  longDescription:
+    "Our solar accessories catalog covers every component needed for a professional solar installation. From DC combiner boxes for string-level protection, to MC4 connectors and solar cables for reliable connections, to power optimizers that maximize panel-level output. We also supply circuit breakers, surge protection devices, grounding kits, conduit fittings, and all associated hardware. Quality-certified components compatible with all major solar module and inverter brands.",
+  image: "/products/accessories.jpg",
+  features: [
+    "DC combiner boxes — 1 to 32 strings",
+    "MC4 connectors — IP68 rated",
+    "Solar cables — 4mm² / 6mm², TÜV certified",
+    "Power optimizers — module-level MPPT",
+    "Surge protection — Type 1 & Type 2 SPD",
+    "Circuit breakers & disconnectors",
+    "Grounding & mounting hardware",
+  ],
+  specs: [
+    { label: "Combiner Box Inputs", value: "1 – 32 strings" },
+    { label: "Max DC Voltage", value: "Up to 1500V" },
+    { label: "MC4 Rating", value: "IP68 / 30A" },
+    { label: "Cable Type", value: "PV1-F 4mm² / 6mm²" },
+    { label: "Optimizer Compatibility", value: "All major brands" },
+    { label: "SPD Type", value: "Type 1 + Type 2" },
+    { label: "Certifications", value: "TÜV / CE / UL" },
+  ],
+  applications: [
+    "Residential solar installations",
+    "Commercial & industrial PV systems",
+    "Utility-scale solar farms",
+    "Battery storage system wiring",
+    "EV charger installation",
+    "Off-grid system wiring",
+  ],
+};
+
 export interface Product {
   slug: string;
   name: string;
@@ -11,6 +48,7 @@ export interface Product {
 }
 
 export const products: Product[] = [
+  solarAccessories,
   {
     slug: "solar-panels",
     name: "Solar Panels",

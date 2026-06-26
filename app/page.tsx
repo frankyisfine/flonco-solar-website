@@ -1,6 +1,14 @@
 import Hero from "@/components/home/Hero";
 import StatsBar from "@/components/home/StatsBar";
-import ProductCategories from "@/components/home/ProductCategories";
+import ProductSlider from "@/components/home/ProductSlider";
+
+const featuredProducts = [
+  { name: "Solar Modules", slug: "solar-panels", image: "/products/solar-module.jpg" },
+  { name: "Inverters", slug: "inverters", image: "/products/inverter.png" },
+  { name: "Energy Storage", slug: "energy-storage", image: "/products/energy-storage.png" },
+  { name: "Mounting Systems", slug: "mounting-systems", image: "/products/mounting.png" },
+  { name: "Solar Accessories", slug: "solar-accessories", image: "/products/accessories.jpg" },
+];
 import WhyChooseUs from "@/components/home/WhyChooseUs";
 import BrandPartners from "@/components/home/BrandPartners";
 import Testimonials from "@/components/home/Testimonials";
@@ -11,7 +19,7 @@ export default function HomePage() {
     <>
       <Hero />
       <StatsBar />
-      <ProductCategories />
+      <ProductSlider slides={featuredProducts} />
       <WhyChooseUs />
       <BrandPartners />
       <Testimonials />

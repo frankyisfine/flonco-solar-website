@@ -189,6 +189,7 @@ export const navLinks: NavItem[] = [
       },
     ],
   },
+  { label: "Manufacturing", href: "/factory" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
   { label: "Power Calculator", href: "/power-calculator" },
