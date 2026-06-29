@@ -28,11 +28,17 @@ export const siteConfig = {
   },
 } as const;
 
+export interface NavSubChild {
+  label: string;
+  href: string;
+}
+
 export interface NavChild {
   label: string;
   href: string;
   desc: string;
   image?: string;
+  children?: NavSubChild[];
 }
 
 export interface NavItem {
@@ -48,50 +54,66 @@ export const navLinks: NavItem[] = [
     href: "/solutions",
     children: [
       {
-        label: "Solar PV Solution",
-        href: "/products/solar-panels",
-        desc: "High-efficiency photovoltaic systems for residential, commercial, and utility-scale applications — grid-tied, off-grid, or hybrid.",
-        image: "/menu/solar-pv.png",
+        label: "Grid-Tied / On-Grid Solar System",
+        href: "/solutions/residential-solar",
+        desc: "Connect to the utility grid to offset electricity bills. Sell excess power back to the grid with net metering — the most common solar setup.",
+        image: "/products/solar-module.jpg",
+        children: [
+          { label: "Residential", href: "/solutions/residential-solar" },
+          { label: "Commercial", href: "/solutions/residential-solar" },
+          { label: "Utility", href: "/solutions/residential-solar" },
+        ],
       },
       {
-        label: "Energy Storage Solution",
-        href: "/products/energy-storage",
-        desc: "Battery energy storage systems (BESS) for peak shaving, backup power, and solar self-consumption — residential to utility-scale.",
-        image: "/menu/energy-storage.svg",
+        label: "Hybrid Solar System",
+        href: "/solutions/residential-solar",
+        desc: "Combine solar panels with battery storage for energy independence. Use stored power at night or during outages — best of both worlds.",
+        image: "/products/energy-storage.png",
+        children: [
+          { label: "Residential", href: "/solutions/residential-solar" },
+          { label: "Commercial", href: "/solutions/residential-solar" },
+          { label: "Utility", href: "/solutions/residential-solar" },
+        ],
       },
       {
-        label: "Solar + Storage Solution",
-        href: "/products/complete-pv-systems",
-        desc: "Integrated solar and battery systems for 24/7 clean energy — maximize self-consumption and ensure power reliability.",
-        image: "/menu/energy-storage.svg",
+        label: "Off-Grid Solar System",
+        href: "/solutions/residential-solar",
+        desc: "Complete energy independence — no grid connection needed. Ideal for remote locations, islands, and areas with unreliable utility power.",
+        image: "/products/energy-storage.png",
+        children: [
+          { label: "Residential", href: "/solutions/residential-solar" },
+          { label: "Commercial", href: "/solutions/residential-solar" },
+          { label: "Utility", href: "/solutions/residential-solar" },
+        ],
       },
       {
-        label: "EV Charging Solution",
+        label: "Solar + EV Charger System",
         href: "/products/ev-charging-stations",
-        desc: "AC and DC fast charging stations for home, workplace, fleet, and public charging networks — solar-integration ready.",
+        desc: "Power your electric vehicle with sunshine. Integrated solar PV and EV charging — reduce fuel costs and carbon footprint.",
+        image: "/products/solar-module.jpg",
+        children: [
+          { label: "Residential", href: "/products/ev-charging-stations" },
+          { label: "Commercial", href: "/products/ev-charging-stations" },
+          { label: "Utility", href: "/products/ev-charging-stations" },
+        ],
       },
       {
-        label: "Solar Water Pumping",
+        label: "Solar + Pump System",
         href: "/products/solar-water-pumps",
-        desc: "Solar-powered water pumps for agricultural irrigation, livestock watering, and community water supply — zero fuel cost.",
-        image: "/menu/solar-pump.jpg",
+        desc: "Solar-powered water pumping for agricultural irrigation, livestock watering, and community supply — zero fuel cost, zero emissions.",
+        image: "/products/solar-module.jpg",
       },
       {
-        label: "Solar Air Conditioning",
+        label: "Solar + Air Conditioner System",
         href: "/products/solar-air-conditioners",
-        desc: "Hybrid solar AC systems that reduce cooling electricity costs by 50–90% — ideal for sunny climates.",
-        image: "/menu/solar-ac.jpg",
+        desc: "Reduce cooling electricity costs by 50–90% with hybrid solar AC. DC inverter technology for residential and commercial spaces.",
+        image: "/products/solar-module.jpg",
       },
       {
-        label: "Off-Grid & Microgrid",
-        href: "/products/complete-pv-systems",
-        desc: "Independent power systems for remote locations, islands, and critical infrastructure — reliable, sustainable, self-sufficient.",
-        image: "/menu/microgrid.svg",
-      },
-      {
-        label: "OEM & Factory Sourcing",
-        href: "/contact",
-        desc: "Custom manufacturing, private labeling, and direct factory partnerships — your brand, our quality.",
+        label: "BESS (Battery Energy Storage System)",
+        href: "/products/energy-storage",
+        desc: "Standalone battery storage for peak shaving, backup power, and grid services. LiFePO4 technology — 5kWh to 1MWh+ scalable systems.",
+        image: "/products/energy-storage.png",
       },
     ],
   },
@@ -103,53 +125,31 @@ export const navLinks: NavItem[] = [
         label: "Solar Panels",
         href: "/products/solar-panels",
         desc: "High-efficiency mono PERC, TOPCon, and HJT modules — 400W to 700W+, 25-year warranty.",
-        image: "/menu/solar-pv.png",
+        image: "/products/solar-module.jpg",
       },
       {
         label: "Inverters",
         href: "/products/inverters",
         desc: "String, hybrid, and microinverters from 1kW to 250kW+ — up to 99% efficiency with smart monitoring.",
-        image: "/menu/inverter.svg",
+        image: "/products/inverter.png",
       },
       {
         label: "Energy Storage",
         href: "/products/energy-storage",
         desc: "LiFePO4 battery systems 5kWh to 1MWh+ — 6,000+ cycles, intelligent BMS, modular design.",
-        image: "/menu/energy-storage.svg",
+        image: "/products/energy-storage.png",
       },
       {
         label: "Mounting Systems",
         href: "/products/mounting-systems",
         desc: "Roof, ground, carport, and tracking mounts — aluminum & galvanized steel, 25+ year durability.",
+        image: "/products/mounting.png",
       },
       {
-        label: "Complete PV Systems",
-        href: "/products/complete-pv-systems",
-        desc: "Pre-configured solar kits for residential, commercial, and off-grid — all components, one supplier.",
-        image: "/menu/solar-pv.png",
-      },
-      {
-        label: "Solar Water Pumps",
-        href: "/products/solar-water-pumps",
-        desc: "Submersible & surface pumps up to 500m³/h — MPPT controller, stainless steel, zero operating cost.",
-        image: "/menu/solar-pump.jpg",
-      },
-      {
-        label: "Solar Pump Inverters",
-        href: "/products/solar-pump-inverters",
-        desc: "Drive standard AC pumps directly from solar panels — advanced MPPT, hybrid grid input option.",
-        image: "/menu/inverter.svg",
-      },
-      {
-        label: "Solar Air Conditioners",
-        href: "/products/solar-air-conditioners",
-        desc: "9,000–60,000 BTU hybrid solar AC — DC inverter, R32 eco refrigerant, quick 2–3 year payback.",
-        image: "/menu/solar-ac.jpg",
-      },
-      {
-        label: "EV Charging Stations",
-        href: "/products/ev-charging-stations",
-        desc: "7kW AC to 360kW DC fast chargers — CCS2, CHAdeMO, GB/T, OCPP 1.6J remote management.",
+        label: "Solar Accessories",
+        href: "/products/solar-accessories",
+        desc: "DC combiner boxes, MC4 connectors, solar cables, optimizers, breakers, and surge protectors — everything to complete your installation.",
+        image: "/products/accessories.jpg",
       },
     ],
   },

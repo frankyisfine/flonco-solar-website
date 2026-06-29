@@ -9,7 +9,7 @@ const featuredProducts = [
   { name: "Mounting Systems", slug: "mounting-systems", image: "/products/mounting.png" },
   { name: "Solar Accessories", slug: "solar-accessories", image: "/products/accessories.jpg" },
 ];
-import WhyChooseUs from "@/components/home/WhyChooseUs";
+import WhyUsB from "@/components/home/WhyUsB";
 import BrandPartners from "@/components/home/BrandPartners";
 import Testimonials from "@/components/home/Testimonials";
 import CTASection from "@/components/home/CTASection";
@@ -20,7 +20,7 @@ export default function HomePage() {
       <Hero />
       <StatsBar />
       <ProductSlider slides={featuredProducts} />
-      <WhyChooseUs />
+      <WhyUsB />
       <BrandPartners />
       <Testimonials />
       <CTASection />

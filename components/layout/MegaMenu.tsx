@@ -148,9 +148,25 @@ export default function MegaMenu({ item }: { item: NavItem }) {
               <h4 className="text-sm font-bold text-[#1E293B] mb-2">
                 {activeChild?.label}
               </h4>
-              <p className="text-xs text-gray-400 leading-relaxed max-w-[220px]">
+              <p className="text-xs text-gray-400 leading-relaxed max-w-[220px] mb-3">
                 {activeChild?.desc}
               </p>
+
+              {/* Sub-children (e.g. Residential / Commercial / Utility) */}
+              {activeChild?.children && activeChild.children.length > 0 && (
+                <div className="flex gap-1.5 flex-wrap justify-center">
+                  {activeChild.children.map((sub) => (
+                    <Link
+                      key={sub.href + sub.label}
+                      href={sub.href}
+                      onClick={() => setOpen(false)}
+                      className="px-3 py-1.5 rounded-lg text-xs font-medium bg-primary/8 text-primary hover:bg-primary hover:text-white transition-colors"
+                    >
+                      {sub.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
           </motion.div>
         )}
